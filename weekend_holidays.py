@@ -1,4 +1,5 @@
 import datetime
+from statistics import mean, median
 
 holidays = [
 	(1, 1),
@@ -17,6 +18,15 @@ def is_weekend(year: int, holiday_tuple):
 	month, day = holiday_tuple
 	return datetime.datetime(year, month, day).weekday() in weekend_days
 
+yearly_weekend_holiday_number = []
+
 for year in range(2022, 2422):
-	weekend_holidays = filter(lambda holiday: is_weekend(year, holiday), holidays)
-	print(f'{year}: {len(list(weekend_holidays))}')
+	weekend_holidays = list(filter(lambda holiday: is_weekend(year, holiday), holidays))
+	num_weekend_holidays = len(weekend_holidays)
+
+	yearly_weekend_holiday_number.append(num_weekend_holidays)
+
+	print(f'{year}: {weekend_holidays}')
+	
+print(f'mean: {mean(yearly_weekend_holiday_number)}')
+print(f'median: {median(yearly_weekend_holiday_number)}')
